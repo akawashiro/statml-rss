@@ -29,9 +29,21 @@ for entry in range(len(feed.entries)):
     title = feed.entries[entry].title
     link = feed.entries[entry].link
     description = feed.entries[entry].description
+    author = feed.entries[entry].author
+    a = ""
+    l = 0
+    for c in author:
+        if c == '<':
+            l += 1
+        if c == '>':
+            l -= 1
+        if 0 == l and '>' != c:
+            a += c
+    author = a
 
     # 表示
     print "<h2>", title, "</h2>"
     # print link
+    print "<p>", author, "</p>"
     print description
 print "</body></html>"
